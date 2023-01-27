@@ -13,7 +13,7 @@ namespace LB_CardapioDigital.Services
         public async Task<IEnumerable<Grupo>?> GetGruposAsync(string token)
         {
             _httpClient.DefaultRequestHeaders.Add("token", Convert.ToBase64String(Encoding.UTF8.GetBytes(token)));
-            return await _httpClient.GetFromJsonAsync<IEnumerable<Grupo>>("/v1/Grupo");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<Grupo>>("/cardapio/v1/Grupo");
         }
     }
 }

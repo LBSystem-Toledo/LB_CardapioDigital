@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Radzen;
 
 #if DEBUG
-    string url = "https://localhost:5011";
+    string url = "http://cloud.lbsystemsoftware.com.br:8080";
 #else 
     string url = "";
 #endif
