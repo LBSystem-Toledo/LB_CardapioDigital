@@ -19,6 +19,9 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(url) });
 
 builder.Services.AddScoped<IGrupoService, GrupoService>();
 builder.Services.AddScoped<IAdicionalService, AdicionalService>();
+builder.Services.AddScoped<IObservacaoService, ObservacaoService>();
+builder.Services.AddScoped<IPontoCarneService, PontoCarneService>();
+builder.Services.AddScoped<ISaborService, SaborService>();
 
 builder.Services.AddScoped<ContextMenuService>();
 builder.Services.AddScoped<DialogService>();

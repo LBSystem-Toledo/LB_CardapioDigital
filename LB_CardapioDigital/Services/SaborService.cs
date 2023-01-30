@@ -1,5 +1,7 @@
 ﻿using LB_CardapioDigital.Models;
 using LB_CardapioDigital.Services.Interfaces;
+using System.Net.Http.Json;
+using System.Text;
 
 namespace LB_CardapioDigital.Services
 {
@@ -10,7 +12,8 @@ namespace LB_CardapioDigital.Services
 
         public async Task<IEnumerable<Sabor>?> GetSaboresAsync(string token, string cdProduto)
         {
-            return null;
+            _httpClient.DefaultRequestHeaders.Add("token", Convert.ToBase64String(Encoding.UTF8.GetBytes(token)));
+            return await _httpClient.GetFromJsonAsync<IEnumerable<Sabor>>("/cardapio/v1/Sabor?Cd_produto=" + cdProduto);
         }
     }
 }

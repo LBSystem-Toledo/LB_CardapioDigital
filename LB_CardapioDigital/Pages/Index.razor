@@ -35,13 +35,9 @@ else
                                     </div>
                                 </div>
                                 <hr style="border: none; background-color: rgba(0,0,0,.08); height: 1px; margin: 1rem 0;" />
-                                <RadzenRow class="rz-text-align-center">
-                                    <div class="col-4 col-sm-6">
-                                        <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Text=@($"{String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", prod.PrecoVenda)}") />
-                                    </div>
-                                    <div class="col-8 col-sm-6">
-                                        <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="COMPRAR"/>
-                                    </div>
+                                <RadzenRow>
+                                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Text=@($"{String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", prod.PrecoVenda)}") />
+                                    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="COMPRAR"/>
                                 </RadzenRow>
                             </RadzenCard>
                         </Template> 

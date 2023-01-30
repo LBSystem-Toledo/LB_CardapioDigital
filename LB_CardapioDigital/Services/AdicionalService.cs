@@ -13,7 +13,7 @@ namespace LB_CardapioDigital.Services
         public async Task<IEnumerable<Adicional>?> GetAdicionaisAsync(string token, string cdProduto)
         {
             _httpClient.DefaultRequestHeaders.Add("token", Convert.ToBase64String(Encoding.UTF8.GetBytes(token)));
-            return await _httpClient.GetFromJsonAsync<IEnumerable<Adicional>>("/v1/Adicional?Cd_produto=" + cdProduto);
+            return await _httpClient.GetFromJsonAsync<IEnumerable<Adicional>>("/cardapio/v1/Adicional?Cd_produto=" + cdProduto);
         }
     }
 }
