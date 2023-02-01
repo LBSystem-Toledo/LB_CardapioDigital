@@ -12,7 +12,7 @@ else
     {
         <RadzenPanel AllowCollapse="true" Collapsed="true" class="rz-mx-6 rz-mb-4">
             <HeaderTemplate>
-                <div class="row">
+                <RadzenRow>
                     <div class="col col-2">
                         <RadzenIcon Icon="facebook"/>
                     </div>
@@ -21,27 +21,28 @@ else
                             <b>@g.Ds_grupo.Trim()</b>
                         </h2>
                     </div>
-                </div>
+                </RadzenRow>
             </HeaderTemplate>
-            <ChildContent>
-                    <RadzenDataList WrapItems="true" AllowPaging="false" Data="@g.Produtos" TItem="Produto" PageSize="4">
-                        <Template Context="prod">
-                            <RadzenCard Style="width: 300px;">
-                                <div class="d-flex flex-row align-items-center">
-                                    <RadzenImage Path="icon-192.png" Class="rounded-circle float-start me-3" Style="width: 80px; height: 80px;"/>
-                                    <div>
-                                        <h6 class="mb-0">@prod.Ds_produto</h6>
-                                        <div style="font-size: .8em">@prod.Composicao</div>
-                                    </div>
+            <ChildContent>                
+                <RadzenDataList WrapItems="true" AllowPaging="false" Data="@g.Produtos" TItem="Produto" PageSize="4">
+                    <Template Context="prod">
+                        <RadzenCard>
+                            <div class="row row-cols-auto">
+                                <div class="col">
+                                    <RadzenImage Path="icon-192.png" Class="rounded-circle float-start me-3" Style="width: 80px; height: 80px;" />
                                 </div>
-                                <hr style="border: none; background-color: rgba(0,0,0,.08); height: 1px; margin: 1rem 0;" />
-                                <RadzenRow>
-                                    <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Text=@($"{String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", prod.PrecoVenda)}") />
-                                    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="COMPRAR"/>
-                                </RadzenRow>
-                            </RadzenCard>
-                        </Template> 
-                    </RadzenDataList>
+                                <div class="col">
+                                    <h6 class="mb-0">@prod.Ds_produto</h6>
+                                    <div style="font-size: .8em">@prod.Composicao</div>
+                                </div>
+                            </div>
+                            <hr style="border: none; background-color: rgba(0,0,0,.08); height: 1px; margin: 1rem 0;" />
+                            <RadzenRow>
+                                <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Text=@($"{String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", prod.PrecoVenda)}") />                                
+                            </RadzenRow>
+                        </RadzenCard>
+                    </Template> 
+                </RadzenDataList>
             </ChildContent>
             <SummaryTemplate>
                 <RadzenCard class="mt-3">
