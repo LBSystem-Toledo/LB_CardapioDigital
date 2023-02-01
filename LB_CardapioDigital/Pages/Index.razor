@@ -23,9 +23,11 @@ else
                     </div>
                 </RadzenRow>
             </HeaderTemplate>
-            <ChildContent>                
-                <RadzenDataList WrapItems="true" AllowPaging="false" Data="@g.Produtos" TItem="Produto" PageSize="4">
-                    <Template Context="prod">
+            <ChildContent>   
+            <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 border" >
+                @foreach(var prod in g.Produtos)
+                {
+                        <div class="col" style="margin-bottom: 1rem; margin-top: 1rem">
                         <RadzenCard>
                             <div class="row row-cols-auto">
                                 <div class="col">
@@ -41,8 +43,10 @@ else
                                 <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Text=@($"{String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", prod.PrecoVenda)}") />                                
                             </RadzenRow>
                         </RadzenCard>
-                    </Template> 
-                </RadzenDataList>
+                    </div>
+                }
+            </div>
+
             </ChildContent>
             <SummaryTemplate>
                 <RadzenCard class="mt-3">

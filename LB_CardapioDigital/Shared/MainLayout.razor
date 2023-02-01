@@ -3,10 +3,18 @@
 <div class="page" style="background-color:lightgray">
     <main>
         <RadzenLayout class="rz-shadow-3">
-            <RadzenHeader>
-                <div class="d-flex align-items-center">
-                    <RadzenLabel Text="Header" />
-                </div>
+            <RadzenHeader Style="background-color:lightgray;">
+                <RadzenRow Gap="1px">
+                    <RadzenColumn Size="2" SizeSM="2" SizeLG="2" SizeMD="1" SizeXL="1" SizeXS="1" SizeXX="2">
+                        <RadzenImage Path="icon-192.png" Class="float-start me-3" Style="width: 50px; height: 50px; margin-left: 5px;" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-text-align-start rz-p-2">
+                        <RadzenLabel Text="Nome da Empresa" Style="margin-top: 10px;"/>
+                    </RadzenColumn>                    
+                    <RadzenColumn class="rz-text-align-end rz-p-2">
+                        <RadzenButton Icon="shopping_cart" Style="color:black; background-color:#e9b86c;" />
+                    </RadzenColumn>
+                </RadzenRow>
             </RadzenHeader>
             <RadzenBody>
                 @Body
