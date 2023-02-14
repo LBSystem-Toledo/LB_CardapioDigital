@@ -2,15 +2,26 @@
 @using System.Text;
 @inject IGrupoService grupoService
 
-@if(Grupos == null)
+@if (GruposBusca == null)
 {
     <p>Carregando...</p>
 }
 else
 {
-    @foreach (var g in Grupos)
+
+    <nav class="navbar navbar-light bg-light" style="margin-bottom:8px; display:block; width: 100%" id="navbar">
+        <form class="container-fluid">
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1"> <RadzenIcon Icon="search"/>  </span>
+                @*<input type="text" class="form-control" placeholder="O que deseja pedir?" aria-label="Username" aria-describedby="basic-addon1" id="txt_consulta" @bind="textoBusca"
+                    oninput="@buscarItem()">*@
+                <input type="text" class="form-control" @bind-value="textoBusca" @bind-value:event="oninput" placeholder="O que deseja pedir?" />
+            </div>
+        </form>
+     </nav>
+    @foreach (var g in GruposBusca)
     {
-        <RadzenPanel AllowCollapse="true" Collapsed="true" class="rz-mx-6 rz-mb-4">
+        <RadzenPanel AllowCollapse="true" Collapsed="@string.IsNullOrEmpty(@textoBusca)" class="rz-mx-6 rz-mb-4">
             <HeaderTemplate>
                 <RadzenRow>
                     <div class="col col-2">
@@ -24,17 +35,17 @@ else
                 </RadzenRow>
             </HeaderTemplate>
             <ChildContent>   
-            <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 border" >
+            <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 border" >
                 @foreach(var prod in g.Produtos)
                 {
                         <div class="col" style="margin-bottom: 1rem; margin-top: 1rem">
-                        <RadzenCard>
+                        <RadzenCard id="@g.Cd_grupo">
                             <div class="row row-cols-auto">
                                 <div class="col">
                                     <RadzenImage Path="icon-192.png" Class="rounded-circle float-start me-3" Style="width: 80px; height: 80px;" />
                                 </div>
                                 <div class="col">
-                                    <h6 class="mb-0">@prod.Ds_produto</h6>
+                                    <h6 class="mb-0" id="ds_prod">@prod.Ds_produto</h6>
                                     <div style="font-size: .8em">@prod.Composicao</div>
                                 </div>
                             </div>
@@ -61,9 +72,32 @@ else
     [Parameter]
     public string Id { get; set; } = string.Empty;
     private IEnumerable<Grupo>? Grupos;
-
+    private string textoBusca { get; set; } = string.Empty;
+    private IEnumerable<Grupo> GruposBusca => filtraGrupo();
     protected override async Task OnInitializedAsync()
     {
         Grupos = await grupoService.GetGruposAsync(Id);
+    }
+    private IEnumerable<Grupo> filtraGrupo()
+    {
+        if (Grupos != null && Grupos.Count() > 0 )
+        {
+            if (!string.IsNullOrEmpty(textoBusca))
+            {
+                List<Grupo> GruposFiltrados = new List<Grupo>();
+                Grupos.ToList().ForEach(grupo => grupo.Produtos.ToList()
+                    .ForEach(produto => 
+                    {
+                        if (produto.Ds_produto.ToLower().Contains(textoBusca.ToLower()))
+                            GruposFiltrados.Add(grupo);
+                    }));
+                //GruposFiltrados.ForEach(grupos => grupos.Produtos = grupos.Produtos.ToList().Where(prod => prod.Ds_produto.ToLower().Contains(textoBusca.ToLower())));
+
+                return GruposFiltrados;
+            }
+            else
+                return Grupos;
+        }
+        else return null;
     }
 }
